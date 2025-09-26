@@ -17,15 +17,15 @@ routerCliente.get("/:id", async(_req, res) => {
 
 // cria
 routerCliente.post("/", async(req, res) => {
-    const { nome, sobrenome, idade, email, cpf } = req.body
-    const [novoCliente] = await db("clientes").insert({ nome, sobrenome, idade, email, cpf }).returning("*")
+    const { id, nome, email, telefone, cpf, endereco } = req.body
+    const [novoCliente] = await db("clientes").insert({ id, nome, email, telefone, cpf, endereco }).returning("*")
     res.json(novoCliente)
 })
 
 // atualiza
 routerCliente.put("/:id", async(req, res) => {
-    const { nome, sobrenome, idade, email, cpf } = req.body
-    const [clienteAtualizado] = await db("clientes").where("id", req.params.id).update({ nome, sobrenome, idade, email, cpf }).returning("*")
+     const { nome, email, telefone, cpf, endereco } = req.body
+    const [clienteAtualizado] = await db("clientes").where("id", req.params.id).update({ nome, email, telefone, cpf, endereco }).returning("*")
     res.json(clienteAtualizado)  
 })
 
